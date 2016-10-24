@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Music Player</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="">Music Player</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href='#Youtube'>Youtube</a></li>
+                <li><a href='#Spotify'>Spotify</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add your Own!<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a type="button" data-toggle="modal" href="#YoutubeModel">Youtube Playlist</a></li>
+                        <li><a type="button" data-toggle="modal" href="#SpotifyModel">Spotify Playlist</a></li>
+                    </ul>
+                </li>
+                <li><a href="https://github.com/nab0310">Github</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="SpotifyModel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="SpotifyNewPlaylistLabel">New Spotify Playlist</h4>
+            </div>
+            <label class="control-label">Enter the URL of a playlist:</label>
+            <input type="text" class="form-control" id="SpotifyPlaylist">
+            <button type="button" class="btn btn-default" onclick="addSpotifyPlaylist(''+document.getElementById('SpotifyPlaylist').value+'')">Submit</button>
+        </div>
+    </div>
+</div>
+<script>
+    function addSpotifyPlaylist(playlistURL) {
+        alert(playlistURL);
+        var finalURL;
+        if(playlistURL.includes("open.spotify.com")){
+            var split = playlistURL.split('/');
+            finalURL = "https://embed.spotify.com/?uri=spotify%3Auser%3A"+split[4]+"%3Aplaylist%3A"+split[5];
+        }if(playlistURL.includes("spotify:")){
+            var split = playlistURL.split(':');
+            finalURL = "https://embed.spotify.com/?uri=spotify%3Auser%3A"+split[2]+"%3Aplaylist%3A"+split[4];
+        }
+        else{
+            finalURL = playlistURL;
+        }
+        $("#Spotify").append("<iframe width= '300' height= '380' frameborder='0' allowtransparency='true' src="+finalURL+"></iframe>");
+    }
+</script>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="YoutubeModel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">New Youtube Playlist</h4>
+            </div>
+            <label class="control-label">Enter the URL of a playlist:</label>
+            <input type="text" class="form-control" id="YoutubePlaylist">
+            <button type="button" class="btn btn-default" onclick="addYTPlaylist(''+document.getElementById('YoutubePlaylist').value+'')">Submit</button>
+        </div>
+    </div>
+</div>
+<script>
+    function addYTPlaylist(playlistURL) {
+        var finalURL;
+        if(!playlistURL.includes("www.")){
+            var split = playlistURL.split('/');
+            finalURL = "https://www.youtube.com/embed/"+split[3];
+        }
+        if(playlistURL.includes("watch")){
+            var split = playlistURL.split('watch?v=');
+            finalURL = "https://www.youtube.com/embed/"+split[1];
+        }
+        else{
+            finalURL = playlistURL;
+        }
+        $("#Youtube").append("<iframe frameborder='0' allowfullscreen='' src="+finalURL+"></iframe>");
+    }
+</script>
+<div class="jumbotron">
+    <h1>Hello, world!</h1>
+</div>
+<section id="Youtube">
+    <iframe src="https://www.youtube.com/embed/wlsdMpnDBn8" frameborder="0" allowfullscreen=""></iframe>
+    <iframe src="https://www.youtube.com/embed/YRLw55eGMn8" frameborder="0" allowfullscreen=""></iframe>
+    <iframe src="https://www.youtube.com/embed/4KSlB-eA3u4" frameborder="0" allowfullscreen=""></iframe>
+</section>
+<section id="Spotify">
+    <iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3A1287242681%3Aplaylist%3A66MpRPEXBL7O9aeEyUOkKu" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+</section>
+</body>
+</html>

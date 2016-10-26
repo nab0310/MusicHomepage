@@ -23,7 +23,7 @@
                 <li><a href='#Youtube'>Youtube</a></li>
                 <li><a href='#Spotify'>Spotify</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add your Own!<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false">Add your Own!<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a type="button" data-toggle="modal" href="#YoutubeModel">Youtube Playlist</a></li>
                         <li><a type="button" data-toggle="modal" href="#SpotifyModel">Spotify Playlist</a></li>
@@ -50,6 +50,7 @@
 </div>
 <script>
     function addSpotifyPlaylist(playlistURL) {
+        alert(playlistURL);
         var finalURL;
         if(playlistURL.includes("open.spotify.com")){
             var split = playlistURL.split('/');
@@ -94,8 +95,9 @@
         $("#Youtube").append("<iframe frameborder='0' allowfullscreen='' src="+finalURL+"></iframe>");
     }
 </script>
+
 <div class="jumbotron">
-    <h1>Hello, world!</h1>
+    <h1>Music Player</h1>
 </div>
 <section id="Youtube">
     <iframe src="https://www.youtube.com/embed/wlsdMpnDBn8" frameborder="0" allowfullscreen=""></iframe>
